@@ -2,10 +2,22 @@ package com.example.leguaalerta.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val VerdeLegua = Color(0xFF2F6B5E)
+val VerdeLeguaClaro = Color(0xFFDCEDE7)
+val AmbarSuave = Color(0xFFE3A33B)
+val AmbarClaro = Color(0xFFFBEBCF)
+val CremaFondo = Color(0xFFF7F4EE)
+val BlancoTarjeta = Color(0xFFFFFFFF)
+val TextoPrincipal = Color(0xFF2E2A26)
+val TextoSecundario = Color(0xFF6F6860)
+val BordeSuave = Color(0xFFE2DCD2)
+val RojoError = Color(0xFFB3261E)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val EstadoRecibidoFondo = Color(0xFFEDEAE4)
+val EstadoRecibidoTexto = Color(0xFF5B554E)
+val EstadoEnTerrenoFondo = Color(0xFFDCEBFF)
+val EstadoEnTerrenoTexto = Color(0xFF1F5FAD)
+val EstadoDerivadoFondo = Color(0xFFECE6FF)
+val EstadoDerivadoTexto = Color(0xFF6146B8)
+val EstadoCerradoFondo = Color(0xFFDDF5E7)
+val EstadoCerradoTexto = Color(0xFF1E7A48)
