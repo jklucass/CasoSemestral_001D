@@ -44,6 +44,7 @@ class ReportesViewModel(
         alTerminar: () -> Unit
     ) {
         viewModelScope.launch {
+            
             val rutaFoto = foto?.let { fotoTomada ->
                 withContext(Dispatchers.IO) { fotoRepository.guardar(fotoTomada) }
             }

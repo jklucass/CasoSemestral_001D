@@ -19,7 +19,6 @@ data class Reporte(
     val fechaCreacion: Long = System.currentTimeMillis()
 )
 
-/** Código legible del caso, por ejemplo "SJ-2026-0007". */
 fun Reporte.codigoVisible(): String {
     val anio = Calendar.getInstance().apply { timeInMillis = fechaCreacion }.get(Calendar.YEAR)
     return String.format(Locale.ROOT, "SJ-%d-%04d", anio, id)

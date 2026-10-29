@@ -6,17 +6,16 @@ import java.security.MessageDigest
 
 class UsuarioRepository(private val usuarioDao: UsuarioDao) {
 
-
     suspend fun registrar(usuario: Usuario): Boolean {
         if (usuarioDao.buscarPorCorreo(usuario.correo) != null) return false
         usuarioDao.insertar(usuario)
         return true
     }
 
-
     suspend fun iniciarSesion(correo: String, contrasena: String, recordar: Boolean): Usuario? {
         val usuario = usuarioDao.buscarPorCorreo(correo) ?: return null
         if (usuario.contrasenaCifrada != cifrar(contrasena)) return null
+
         usuarioDao.olvidarSesiones()
         if (recordar) usuarioDao.recordarSesion(usuario.id)
         return usuario
@@ -27,6 +26,7 @@ class UsuarioRepository(private val usuarioDao: UsuarioDao) {
     suspend fun cerrarSesion() = usuarioDao.olvidarSesiones()
 
     companion object {
+        
         fun cifrar(contrasena: String): String =
             MessageDigest.getInstance("SHA-256")
                 .digest(contrasena.toByteArray())

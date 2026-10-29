@@ -3,7 +3,6 @@ package com.example.leguaalerta.viewmodel
 import com.example.leguaalerta.model.EstadoReporte
 import com.example.leguaalerta.model.TipoIncidencia
 
-
 object ValidadorFormularios {
 
     const val CODIGO_MUNICIPAL = "SJ2026"

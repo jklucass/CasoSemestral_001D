@@ -47,7 +47,6 @@ class SesionViewModel(
         }
     }
 
-  
     fun registrar(
         nombre: String,
         correo: String,
