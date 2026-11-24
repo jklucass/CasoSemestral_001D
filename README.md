@@ -3,7 +3,7 @@
 ## Integrantes
 
 - Diego Mora
-- [Nombre del compañero/a]
+- Lucas Campos
 
 Aplicación Android para la **gestión y el seguimiento de situaciones de seguridad comunal** en
 San Joaquín, desarrollada para el caso semestral de **DSY1105 – Desarrollo de Aplicaciones
