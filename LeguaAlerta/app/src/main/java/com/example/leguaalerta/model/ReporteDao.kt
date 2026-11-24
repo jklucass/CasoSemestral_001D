@@ -2,6 +2,7 @@ package com.example.leguaalerta.model
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
@@ -9,8 +10,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ReporteDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertar(reporte: Reporte): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertarTodos(reportes: List<Reporte>)
 
     @Update
     suspend fun actualizar(reporte: Reporte)

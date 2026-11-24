@@ -1,7 +1,12 @@
 # LeguaAlerta
 
+## Integrantes
+
+- Diego Mora
+- [Nombre del compañero/a]
+
 Aplicación Android para la **gestión y el seguimiento de situaciones de seguridad comunal** en
-San Joaquín, desarrollada para el caso semestral de **DSY1104 – Desarrollo de Aplicaciones
+San Joaquín, desarrollada para el caso semestral de **DSY1105 – Desarrollo de Aplicaciones
 Móviles** (Duoc UC, sede San Joaquín). Es un MVP académico: todos los datos son ficticios.
 
 ## ¿Qué hace?
@@ -53,14 +58,70 @@ Cada capa solo conoce a la de abajo: `ui` → `viewmodel` → `repository` → `
 
 ## Tecnologías
 
-Kotlin · Jetpack Compose (Material 3) · Room · Navigation Compose · ViewModel + StateFlow ·
+Kotlin · Jetpack Compose (Material 3) · Room · Retrofit + Gson · Navigation Compose · ViewModel + StateFlow ·
+JUnit 4 + MockK · 
 compileSdk/targetSdk 37 · minSdk 24.
+
+## API REST consumida (Retrofit + Xano)
+
+El backend (base de datos y API REST) está creado en **Xano** y la app lo consume con Retrofit.
+La URL base del grupo de API está en `model/RetrofitClient.kt`.
+
+| # | Método | Endpoint | Uso en la app |
+| --- | --- | --- | --- |
+| 1 | GET | `/api/reportes` | Descarga todos los reportes (bandeja municipal) |
+| 2 | GET | `/api/reportes/vecino/{vecinoId}` | Descarga los reportes de un vecino |
+| 3 | POST | `/api/reportes` | Crea un reporte desde el formulario por pasos |
+| 4 | PUT | `/api/reportes/{id}` | Cambia el estado y la observación de un caso |
+| 5 | GET | `/api/anuncios` | Descarga los anuncios para los vecinos |
+| 6 | POST | `/api/anuncios` | Publica un anuncio (vista municipal) |
+| 7 | DELETE | `/api/anuncios/{id}` | Elimina un anuncio |
+
+Los datos que llegan de la API se guardan en Room, así la interfaz siempre lee de la base local
+y la app sigue funcionando si el servidor no responde.
+
+Ejemplo de JSON de un reporte:
+
+```json
+{
+  "id": 1,
+  "vecinoId": 2,
+  "tipo": "ALUMBRADO",
+  "descripcion": "Luminaria apagada hace una semana",
+  "ubicacionReferencial": "Plaza central",
+  "prioridad": "MEDIA",
+  "estado": "RECIBIDO",
+  "rutaFoto": null,
+  "observacionMunicipal": "",
+  "fechaCreacion": 1764000000000
+}
+```
+
+## Pruebas unitarias
+
+Están en `app/src/test/java/com/example/leguaalerta/` y usan JUnit 4, MockK y `kotlinx-coroutines-test`:
+
+- `ReporteRepositoryTest`: crear con y sin conexión, sincronizar y actualizar estado (API simulada con MockK).
+- `ValidadorFormulariosTest`: validaciones de correo, contraseña, código municipal y observación, y cifrado de contraseña.
+
+Ejecutar: `./gradlew testDebugUnitTest` (o clic derecho sobre la carpeta `test` en Android Studio → *Run Tests*).
+
+## APK firmado (release)
+
+- Llave: `app/leguaalerta.jks` (alias `leguaalerta`, clave `legua2026`, solo con fines académicos).
+- Configuración de firma: bloque `signingConfigs` en `app/build.gradle.kts`.
+- Generar: `./gradlew assembleRelease`
+- Resultado: `app/build/outputs/apk/release/app-release.apk` (copia en la carpeta `apk/` del repositorio).
+- Ícono personalizado: escudo con casa sobre fondo verde (`res/drawable/ic_launcher_*.xml` y `mipmap-*`).
+
+Captura del APK firmado y del `.jks`: _(agregar imagen aquí)_
 
 ## Cómo ejecutar
 
 1. Abrir la carpeta `LeguaAlerta` en Android Studio.
 2. Instalar el **SDK Platform 37** desde *Tools → SDK Manager* si no está instalado.
-3. Sincronizar Gradle y ejecutar en un emulador o teléfono con Android 7.0 o superior.
+3. Poner en `RetrofitClient.kt` la URL base del grupo de API de Xano (termina en `/`).
+4. Sincronizar Gradle y ejecutar en un emulador o teléfono con Android 7.0 o superior.
 
 ## Equipo
 

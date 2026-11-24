@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.leguaalerta.model.LeguaAlertaDatabase
+import com.example.leguaalerta.model.RetrofitClient
 import com.example.leguaalerta.repository.AnuncioRepository
 import com.example.leguaalerta.repository.DatosDemoRepository
 import com.example.leguaalerta.repository.FotoRepository
@@ -28,8 +29,8 @@ class LeguaAlertaViewModelFactory(context: Context) : ViewModelProvider.Factory 
         ) as T
 
         modelClass.isAssignableFrom(ReportesViewModel::class.java) -> ReportesViewModel(
-            reporteRepository = ReporteRepository(baseDeDatos.reporteDao()),
-            anuncioRepository = AnuncioRepository(baseDeDatos.anuncioDao()),
+            reporteRepository = ReporteRepository(baseDeDatos.reporteDao(), RetrofitClient.servicio),
+            anuncioRepository = AnuncioRepository(baseDeDatos.anuncioDao(), RetrofitClient.servicio),
             fotoRepository = FotoRepository(carpetaFotos)
         ) as T
 

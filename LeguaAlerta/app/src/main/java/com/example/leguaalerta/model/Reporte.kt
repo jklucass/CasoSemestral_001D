@@ -2,6 +2,7 @@ package com.example.leguaalerta.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import java.util.Calendar
 import java.util.Locale
 
@@ -16,7 +17,7 @@ data class Reporte(
     val estado: EstadoReporte = EstadoReporte.RECIBIDO,
     val rutaFoto: String? = null,
     val observacionMunicipal: String = "",
-    val fechaCreacion: Long = System.currentTimeMillis()
+    @SerializedName("created_at") val fechaCreacion: Long = System.currentTimeMillis()
 )
 
 fun Reporte.codigoVisible(): String {

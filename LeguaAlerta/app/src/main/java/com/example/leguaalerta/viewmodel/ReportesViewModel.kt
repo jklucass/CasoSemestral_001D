@@ -25,11 +25,22 @@ class ReportesViewModel(
     private val fotoRepository: FotoRepository
 ) : ViewModel() {
 
+    init {
+        sincronizar()
+    }
+
     val todosLosReportes: StateFlow<List<Reporte>> = reporteRepository.observarTodosLosReportes()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(TIEMPO_ESPERA_MS), emptyList())
 
     val anuncios: StateFlow<List<Anuncio>> = anuncioRepository.observarAnuncios()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(TIEMPO_ESPERA_MS), emptyList())
+
+    fun sincronizar() {
+        viewModelScope.launch {
+            reporteRepository.sincronizar()
+            anuncioRepository.sincronizar()
+        }
+    }
 
     fun reportesDeVecino(vecinoId: Int): Flow<List<Reporte>> =
         reporteRepository.observarReportesDeVecino(vecinoId)
