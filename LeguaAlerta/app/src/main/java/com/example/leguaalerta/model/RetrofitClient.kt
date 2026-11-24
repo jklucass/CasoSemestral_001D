@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    const val URL_BASE = "https://TU-INSTANCIA.n7.xano.io/api:TU_GRUPO/"
+    const val URL_BASE = "https://x8ki-letl-twmt.n7.xano.io/api:2v8EZ8MJ/"
 
     val servicio: ApiService by lazy {
         Retrofit.Builder()
